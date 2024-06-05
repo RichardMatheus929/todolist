@@ -1,11 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Sign Up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-  </form>
-  <a href="{% url 'accounts:login' %}">Already have an account? Log in here.</a>
+<h2>Sign Up</h2>
+<form method="post" id="signupForm">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Sign Up</button>
+</form>
+<a href="{% url 'accounts:login' %}">Already have an account? Log in here.</a>
+<script>
+  function validatePasswords() {
+
+    const password1 = document.getElementById('password1').value;
+    const password2 = document.getElementById('password2').value;
+
+    if (password1 != password2) {
+      document.getElementById('aviso_text').innerHTML = "Senhas não coincidem"
+    }
+    else {
+      document.getElementById('aviso_text').innerHTML = "Agora as senhas estão iguais"
+    }
+
+  }
+  document.getElementById('password2').addEventListener('input', validatePasswords);
+
+</script>
 {% endblock %}
