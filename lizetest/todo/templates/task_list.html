@@ -2,7 +2,7 @@
 
 {% block content %}
   <h2>Task List</h2>
-
+  <h2>Bem vindo {{user}}</h2>
   <!-- Formulário de pesquisa -->
   <form method="GET" action="{% url 'todo:task_list' %}">
     <label for="">Pesquisa por nome ou categorias da task</label>

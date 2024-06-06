@@ -28,6 +28,7 @@ class TaskListView(ListView,BaseViews):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['number_tasks'] = self.get_queryset().count()
+        context['user'] = self.request.user.name
         return context
 
 class TaskCreateView(CreateView,BaseViews):
