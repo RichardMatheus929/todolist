@@ -18,6 +18,8 @@
         {{ task.title }} - {{ task.description }} - {{ task.category }} 
         <a href="{% url 'todo:task_edit' pk=task.pk %}">Editar</a>
         <a href="{% url 'todo:task_delete' pk=task.pk %}">Remover</a>
+        <input data-task-id="{{ task.pk }}" class="completed_checkbox" type="checkbox" {% if task.completed %}checked{% endif %}>
+        <label for=""> Task completa</label> 
 
       </li>
     {% endfor %}
@@ -26,4 +28,28 @@
   <p><a href="{% url 'todo:task_list' %}">Lista de tasks</a></p>
   <p><a href="{% url 'todo:task_create' %}">Add Task</a></p>
   <p><a href="{% url 'category:category_list' %}">Ver categorias</a></p>
+
+  <script>
+    function alter(event) {
+      const checkbox = event.target;
+      const id_task = checkbox.getAttribute('data-task-id')
+    
+    fetch(`http://localhost:8000/altertask/completed/${id_task}`, {
+        method: 'GET',
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        // Opcional: Atualize a interface do usuário com base na resposta
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+
+    document.querySelectorAll('.completed_checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', alter);
+    });
+
+  </script>
 {% endblock %}

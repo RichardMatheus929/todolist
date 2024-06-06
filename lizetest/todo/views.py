@@ -10,6 +10,15 @@ from lizetest.accounts.models import User
 
 from django.db.models import Q
 
+from rest_framework.views import Response, status,APIView
+
+class AlterTask(APIView):
+    def get(self,rquest,task_id):
+        task = Task.objects.get(id=task_id)
+        task.completed = not task.completed
+        task.save()
+        return Response({'id_atualizado': task_id})
+
 class TaskListView(ListView,BaseViews):
     model = Task
     template_name = 'task_list.html'
