@@ -5,7 +5,7 @@ from django.conf import settings
 from lizetest.core.models import BaseModel
 
 
-class Category(models.Model):
+class Category(models.Model,BaseModel):
     name = models.CharField(max_length=255)
 
     def __str__(self):
