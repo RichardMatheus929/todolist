@@ -2,6 +2,16 @@
 
 {% block content %}
   <h2>Task List</h2>
+
+  <!-- Formulário de pesquisa -->
+  <form method="GET" action="{% url 'todo:task_list' %}">
+    <label for="">Pesquisa por nome ou categorias da task</label>
+    <input type="text" name="query_task" placeholder="Search tasks">
+    <button type="submit">Search</button>
+  </form>
+
+  <p>Encontramos {{number_tasks}} tasks para você</p><hr>
+
   <ul>
     {% for task in tasks %}
       <li>
@@ -12,6 +22,8 @@
       </li>
     {% endfor %}
   </ul>
-  <a href="{% url 'todo:task_create' %}">Add Task</a> <hr>
-  <a href="{% url 'category:category_list' %}">Ver categorias</a>
+  <hr>
+  <p><a href="{% url 'todo:task_list' %}">Lista de tasks</a></p>
+  <p><a href="{% url 'todo:task_create' %}">Add Task</a></p>
+  <p><a href="{% url 'category:category_list' %}">Ver categorias</a></p>
 {% endblock %}

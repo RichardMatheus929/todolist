@@ -8,13 +8,27 @@ from .models import Task
 from .forms import TaskForm
 from lizetest.accounts.models import User
 
+from django.db.models import Q
+
 class TaskListView(ListView,BaseViews):
     model = Task
     template_name = 'task_list.html'
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        return Task.objects.filter(author=self.request.user)
+        queryset = Task.objects.filter(author=self.request.user)
+        query = self.request.GET.get('query_task')
+        if query:
+            queryset = queryset.filter(
+                Q(title__icontains=query) |
+                Q(category__name__icontains=query)
+            )
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['number_tasks'] = self.get_queryset().count()
+        return context
 
 class TaskCreateView(CreateView,BaseViews):
     model = Task
