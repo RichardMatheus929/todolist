@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'lizetest.todo',
     'lizetest.core',
-    'lizetest.accounts'
+    'lizetest.accounts',
+    'lizetest.category',
 ]
 
 MIDDLEWARE = [

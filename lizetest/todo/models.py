@@ -3,13 +3,7 @@ from django.db import models
 from django.conf import settings
 
 from lizetest.core.models import BaseModel
-
-
-class Category(BaseModel):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
+from lizetest.category.models import Category
 
 class Task(BaseModel):
     title = models.CharField(max_length=255)

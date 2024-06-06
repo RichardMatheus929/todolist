@@ -2,7 +2,7 @@
 
 from django import forms
 from .models import Task
-from .serializers import CategorySerializer
+from lizetest.category.serializers import CategorySerializer
 
 class TaskForm(forms.ModelForm):
     category = CategorySerializer

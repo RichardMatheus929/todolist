@@ -15,7 +15,7 @@ class TaskListView(ListView):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:  # Sua condição aqui
             return redirect('accounts:login')
-        return super().dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs) 
 
 
 class TaskCreateView(CreateView):
