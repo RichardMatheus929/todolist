@@ -1,0 +1,13 @@
+<!-- task_confirm_delete.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Confirmar</h2>
+  <p>Você tem certeza que deseja deletar a categoria "{{ object.name }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+  </form>
+  <a href="{% url 'todo:task_list' %}">Cancel</a>
+{% endblock %}

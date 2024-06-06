@@ -12,5 +12,6 @@
       </li>
     {% endfor %}
   </ul>
-  <a href="{% url 'todo:task_create' %}">Add Task</a>
+  <a href="{% url 'todo:task_create' %}">Add Task</a> <hr>
+  <a href="{% url 'category:category_list' %}">Ver categorias</a>
 {% endblock %}

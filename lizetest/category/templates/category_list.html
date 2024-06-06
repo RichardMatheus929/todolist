@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Task List</h2>
-  <ul>
-    {% for categoria in category %}
-      <li>
-        {{ task.title }} - {{ task.description }} - {{ task.category }} 
-        <a href="{% url 'todo:task_edit' pk=task.pk %}">Editar</a>
-        <a href="{% url 'todo:task_delete' pk=task.pk %}">Remover</a>
+<h2>Lista de categorias</h2>
+<ul>
+  {% for categoria in categorias %}
+  <li>
+    {{ categoria.name }}
+    <a href="{% url 'category:category_edit' pk=categoria.pk %}">Editar</a>
+    <a href="{% url 'category:category_delete' pk=categoria.pk %}">Remover</a>
 
-      </li>
-    {% endfor %}
-  </ul>
-  <a href="{% url 'todo:task_create' %}">Add Task</a>
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'category:category_create' %}">Adicioanar mais categorias</a> <hr>
+<a href="{% url 'todo:task_list' %}">Voltar para lista de tasks</a>
 {% endblock %}

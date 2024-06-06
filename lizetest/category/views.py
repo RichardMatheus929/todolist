@@ -6,16 +6,23 @@ from .forms import CategoryForm
 
 # Create your views here.
 class CategoryListView(ListView):
-    pass
+    model = Category
+    template_name = 'category_list.html'
+    context_object_name = 'categorias'
 
 class CategoryCreateView(CreateView):
     model = Category
     form_class = CategoryForm
     template_name = 'category_form.html'
-    success_url = reverse_lazy('todo:task_list')
+    success_url = reverse_lazy('category:category_list')
 
 class CategoryUpdateView(UpdateView):
     model = Category
     form_class = CategoryForm
     template_name = 'category_form.html'
-    success_url = reverse_lazy('todo:task_list')
+    success_url = reverse_lazy('category:category_list')
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = 'category_confirm_delete.html'
+    success_url = reverse_lazy('category:category_list')

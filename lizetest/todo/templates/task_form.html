@@ -7,5 +7,6 @@
     {{ form.as_p }}
     <button type="submit">{% if request.resolver_match.url_name == 'task_create' %}Create{% else %}Save Changes{% endif %}</button>
   </form>
+  Caso deseje você pode criar uma nova categoria aqui <a href="{% url 'category:category_create' %}">Criar categoria</a> <hr>
   <a href="{% url 'todo:task_list' %}">Back to Task List</a>
 {% endblock %}
