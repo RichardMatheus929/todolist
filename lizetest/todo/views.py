@@ -36,6 +36,11 @@ class TaskCreateView(CreateView,BaseViews):
     form_class = TaskForm
     template_name = 'task_form.html'
     success_url = reverse_lazy('todo:task_list')
+
+    def get_form_kwargs(self):
+        kwargs = super(TaskCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
     
     def form_valid(self, form):
         form.instance.author = self.request.user
