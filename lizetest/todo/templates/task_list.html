@@ -7,28 +7,8 @@
       {% include 'sidebar.html' %}
     </div>
     <div class="col">
+      {% include 'popup.html' %}
       <h2 style="padding-top: 15px;">Lista de tarefas</h2><br>
-
-      <div id="myPopup" style="
-      width: 200px;
-      height: 150px;
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      border: 1px solid #ccc;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      z-index: 9999;
-      padding: 10px;
-      ">
-        <p>Confirma que quer deletar essa task?</p>
-        <input type="button" class="btn btn-outline-success" onclick="closePopup()" value="Cancelar">
-        <input type="button" class="btn btn-outline-danger" onclick="deletetask()" value="Deletar">
-      </div>
-
       <form method="GET" action="{% url 'todo:task_list' %}">
         <input type="text" name="query_task" placeholder="Pesquisa por nome ou categorias da task"
           style="width: 100%;max-width: 300px;">
@@ -64,10 +44,8 @@
               </a>
             </td>
             <td>
-              <a href="{% url 'todo:task_edit' pk=task.pk %}">
-                <!-- <button type="button" class="{% if task.completed %}btn btn-success{% else %}btn btn-outline-success{% endif %}">Completa</button> -->
-                <input data-task-id="{{ task.pk }}" class="form-check" type="checkbox" id="flexSwitchCheckChecked"  {% if task.completed %}checked{% endif %}> 
-              </a>
+              <!-- <button type="button" class="{% if task.completed %}btn btn-success{% else %}btn btn-outline-success{% endif %}">Completa</button> -->
+              <input data-task-id="{{ task.pk }}" class="form-check" type="checkbox" id="flexSwitchCheckChecked"  {% if task.completed %}checked{% endif %}> 
             </td>
           </tr>
           {% endfor %}
