@@ -5,7 +5,7 @@
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">{% if request.resolver_match.url_name == 'task_create' %}Create{% else %}Save Changes{% endif %}</button>
+    <button class="btn btn-primary" type="submit">{% if request.resolver_match.url_name == 'category_create' %}Create{% else %}Save Changes{% endif %}</button>
   </form>
   <a href="{% url 'todo:task_list' %}">Back to Task List</a>
 {% endblock %}
