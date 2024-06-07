@@ -14,8 +14,9 @@
   </form>
   <div style="text-align: center; margin-top: 20px;">
     Caso deseje você pode criar uma nova categoria aqui 
-    <a href="{% url 'category:category_create' %}">Criar categoria</a> <hr>
-    <a href="{% url 'todo:task_list' %}">Volte para a lista de tarefas</a>
+    <a href="{% url 'category:category_create' %}">Criar categoria</a>
+    <p><a href="{% url 'todo:task_list' %}">Volte para a lista de tarefas</a> </p>
+    
   </div>
 </div>
 {% endblock %}

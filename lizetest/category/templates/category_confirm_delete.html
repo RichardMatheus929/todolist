@@ -3,11 +3,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Confirmar</h2>
-  <p>Você tem certeza que deseja deletar a categoria "{{ object.name }}"?</p>
-  <form method="post">
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 20px;">
+  <form method="post" enctype="multipart/form-data"
+    style="width: 400px; border: 1px solid #ccc; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgb(0, 0, 0);">
+    <h2>Confirmar</h2>
+    <label for="" style="padding-bottom: 15px;">Você tem certeza que deseja deletar a categoria "{{ object.name}}"?</label>
     {% csrf_token %}
-    <button type="submit">Confirm</button>
+    <button type="submit" class="btn btn-outline-danger">Confirm</button>
+    <a href="{% url 'todo:task_list' %}"><button type="submit" class="btn btn-outline-success">Cancelar</button></a>
   </form>
-  <a href="{% url 'todo:task_list' %}">Cancel</a>
+</div>
 {% endblock %}

@@ -17,7 +17,7 @@ class AlterTask(APIView):
         task = Task.objects.get(id=task_id)
         task.completed = not task.completed
         task.save()
-        return Response({'id_atualizado': task_id})
+        return Response({'id_atualizado': task_id, "valor":task.completed})
 
 class TaskListView(ListView,BaseViews):
     model = Task
@@ -65,8 +65,23 @@ class TaskUpdateView(UpdateView,BaseViews):
 
 
 
-class TaskDeleteView(DeleteView,BaseViews):
-    model = Task
-    template_name = 'task_confirm_delete.html'
-    success_url = reverse_lazy('todo:task_list')
+class TaskDeleteView(APIView):
+    def get(self, request, task_id):
+        try:
+            task = Task.objects.get(id=task_id)
+            task.delete()
+            return Response({'message': 'Task deleted successfully'})
+        except:
+            return Response({'Erro':'Talvez a id não exista'})
 
+    # def delete(self, request, *args, **kwargs):
+    #     from django.http import HttpResponseRedirect 
+    #     self.object = self.get_object()
+    #     task_status = self.object.completed
+
+    #     if task_status:
+    #         success_url = reverse_lazy('todo:endpoint_task_delete')
+    #     else:
+    #         success_url = self.get_success_url()
+    #         self.object.delete()
+    #         return HttpResponseRedirect(success_url)
