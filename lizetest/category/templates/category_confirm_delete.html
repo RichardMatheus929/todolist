@@ -7,10 +7,10 @@
   <form method="post" enctype="multipart/form-data"
     style="width: 400px; border: 1px solid #ccc; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgb(0, 0, 0);">
     <h2>Confirmar</h2>
-    <label for="" style="padding-bottom: 15px;">Você tem certeza que deseja deletar a categoria "{{ object.name}}"?</label>
+    <label style="padding-bottom: 15px;">Você tem certeza que deseja deletar a categoria "{{ object.name}}"?</label>
     {% csrf_token %}
     <button type="submit" class="btn btn-outline-danger">Confirm</button>
-    <a href="{% url 'todo:task_list' %}"><button type="submit" class="btn btn-outline-success">Cancelar</button></a>
-  </form>
+    </form>
+  <a href="{% url 'category:category_list' %}" style="padding-top: 15px;">Voltar para lista de tasks</a>
 </div>
 {% endblock %}
