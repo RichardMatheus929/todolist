@@ -69,8 +69,11 @@ class TaskDeleteView(APIView):
     def get(self, request, task_id):
         try:
             task = Task.objects.get(id=task_id)
-            task.delete()
-            return Response({'message': 'Task deleted successfully'})
+            if task.completed:
+                return Response({'message':'task complete, not permission delete'})
+            else:
+                task.delete()
+                return Response({'message': 'Task deleted successfully'})
         except:
             return Response({'Erro':'Talvez a id não exista'})
 

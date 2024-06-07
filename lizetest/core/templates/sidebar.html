@@ -1,5 +1,5 @@
 <!-- sidebar.html -->
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 100%; height: 95vh;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap" />
@@ -9,12 +9,15 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="{% url 'todo:task_list' %}" class="nav-link {% if request.resolver_match.url_name == 'task_list' %}active{% else %}link-dark{% endif %}" aria-current="page">
+            <a href="{% url 'todo:task_list' %}"
+                class="nav-link {% if request.resolver_match.url_name == 'task_list' %}active{% else %}link-dark{% endif %}"
+                aria-current="page">
                 Minha lista de tasks
             </a>
         </li>
         <li>
-            <a href="{% url 'category:category_list' %}" class="nav-link {% if request.resolver_match.url_name == 'category_list' %}active{% else %}link-dark{% endif %}">
+            <a href="{% url 'category:category_list' %}"
+                class="nav-link {% if request.resolver_match.url_name == 'category_list' %}active{% else %}link-dark{% endif %}">
                 Minha lista de categorias
             </a>
         </li>
@@ -28,6 +31,10 @@
                 Criar nova task
             </a>
         </li>
+        <a href="{% url 'todo:task_create' %}">
+            <button type="button" class="btn btn-outline-info"> Fazer login </button>
+        </a>
     </ul>
     <hr>
+
 </div>
