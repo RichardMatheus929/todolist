@@ -26,15 +26,21 @@
                 Criar nova categoria
             </a>
         </li>
-        <li>
+        <li style="padding-bottom: 30px;">
             <a href="{% url 'todo:task_create' %}" class="nav-link link-dark">
                 Criar nova task
             </a>
         </li>
-        <a href="{% url 'todo:task_create' %}">
-            <button type="button" class="btn btn-outline-info"> Fazer login </button>
-        </a>
+        <button type="button" class="btn btn-outline-info" id="btn-signup"> Fazer login </button>
     </ul>
     <hr>
 
 </div>
+
+<script>
+    function changepag() {
+        console.log('clicou no btn-signup')
+        window.location.href = '/accounts/login';
+    }
+    btn = document.getElementById('btn-signup').addEventListener('click', changepag)
+</script>
