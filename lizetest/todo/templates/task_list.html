@@ -1,33 +1,42 @@
 {% extends 'base.html' %}
 
-{% block content %}
-  <h2>Task List</h2>
-  <h2>Bem vindo {{user}}</h2>
-  <!-- Formulário de pesquisa -->
-  <form method="GET" action="{% url 'todo:task_list' %}">
-    <label for="">Pesquisa por nome ou categorias da task</label>
-    <input type="text" name="query_task" placeholder="Search tasks">
-    <button type="submit">Search</button>
-  </form>
+<div class="container-fluid">
+  {% block content %}
+  <div class="row">
+    <div class="col-auto">
+        {% include 'sidebar.html' %}
+    </div>
+    <div class="col">
+        <h2 style="padding-top: 15px;">Task List</h2>
+        <h2>Bem vindo {{user}}</h2>
+        <!-- Formulário de pesquisa -->
+        <form method="GET" action="{% url 'todo:task_list' %}">
+          <label for="">Pesquisa por nome ou categorias da task</label>
+          <input type="text" name="query_task" placeholder="Search tasks">
+          <button type="submit">Search</button>
+        </form>
 
-  <p>Encontramos {{number_tasks}} tasks para você</p><hr>
+        <p>Encontramos {{number_tasks}} tasks para você</p><hr>
 
-  <ul>
-    {% for task in tasks %}
-      <li>
-        {{ task.title }} - {{ task.description }} - {{ task.category }} 
-        <a href="{% url 'todo:task_edit' pk=task.pk %}">Editar</a>
-        <a href="{% url 'todo:task_delete' pk=task.pk %}">Remover</a>
-        <input data-task-id="{{ task.pk }}" class="completed_checkbox" type="checkbox" {% if task.completed %}checked{% endif %}>
-        <label for=""> Task completa</label> 
+        <ul>
+          {% for task in tasks %}
+            <li>
+              {{ task.title }} - {{ task.description }} - {{ task.category }} 
+              <a href="{% url 'todo:task_edit' pk=task.pk %}">Editar</a>
+              <a href="{% url 'todo:task_delete' pk=task.pk %}">Remover</a>
+              <input data-task-id="{{ task.pk }}" class="completed_checkbox" type="checkbox" {% if task.completed %}checked{% endif %}>
+              <label for=""> Task completa</label> 
 
-      </li>
-    {% endfor %}
-  </ul>
-  <hr>
-  <p><a href="{% url 'todo:task_list' %}">Lista de tasks</a></p>
-  <p><a href="{% url 'todo:task_create' %}">Add Task</a></p>
-  <p><a href="{% url 'category:category_list' %}">Ver categorias</a></p>
+            </li>
+          {% endfor %}
+        </ul>
+        <hr>
+        <p><a href="{% url 'todo:task_list' %}">Lista de tasks</a></p>
+        <p><a href="{% url 'todo:task_create' %}">Add Task</a></p>
+        <p><a href="{% url 'category:category_list' %}">Ver categorias</a></p>
+    </div>
+  </div>
+</div>
 
   <script>
     function alter(event) {

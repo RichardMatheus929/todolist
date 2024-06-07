@@ -9,8 +9,13 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="{% url 'todo:task_list' %}" class="nav-link active" aria-current="page">
+            <a href="{% url 'todo:task_list' %}" class="nav-link {% if request.resolver_match.url_name == 'task_list' %}active{% else %}link-dark{% endif %}" aria-current="page">
                 Minha lista de tasks
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'category:category_list' %}" class="nav-link {% if request.resolver_match.url_name == 'category_list' %}active{% else %}link-dark{% endif %}">
+                Minha lista de categorias
             </a>
         </li>
         <li>
