@@ -4,48 +4,62 @@
   {% block content %}
   <div class="row">
     <div class="col-auto">
-        {% include 'sidebar.html' %}
+      {% include 'sidebar.html' %}
     </div>
     <div class="col">
-        <h2 style="padding-top: 15px;">Task List</h2>
-        <h2>Bem vindo {{user}}</h2>
-        <!-- Formulário de pesquisa -->
-        <form method="GET" action="{% url 'todo:task_list' %}">
-          <label for="">Pesquisa por nome ou categorias da task</label>
-          <input type="text" name="query_task" placeholder="Search tasks">
-          <button type="submit">Search</button>
-        </form>
+      <h2 style="padding-top: 15px;">Lista de tarefas</h2><br>
 
-        <p>Encontramos {{number_tasks}} tasks para você</p><hr>
+      <form method="GET" action="{% url 'todo:task_list' %}">
+        <input type="text" name="query_task" placeholder="Pesquisa por nome ou categorias da task"
+          style="width: 100%;max-width: 300px;">
+        <button type="submit" class="btn btn-outline-success">Search</button>
+      </form><br>
 
-        <ul>
+      <p>Encontramos {{number_tasks}} tasks para você</p>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Categoria</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
           {% for task in tasks %}
-            <li>
-              {{ task.title }} - {{ task.description }} - {{ task.category }} 
-              <a href="{% url 'todo:task_edit' pk=task.pk %}">Editar</a>
-              <a href="{% url 'todo:task_delete' pk=task.pk %}">Remover</a>
-              <input data-task-id="{{ task.pk }}" class="completed_checkbox" type="checkbox" {% if task.completed %}checked{% endif %}>
-              <label for=""> Task completa</label> 
-
-            </li>
+          <tr>
+            <td>{{task.title}}</td>
+            <td>{{task.description}}</td>
+            <td>{{ task.category }}</td>
+            <td>
+              <a href="{% url 'todo:task_edit' pk=task.pk %}">
+                <button type="button" class="btn btn-outline-primary">Editar</button>
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'todo:task_delete' pk=task.pk %}">
+                <button type="button" class="btn btn-outline-danger">Deletar</button>
+              </a>
+            </td>
+          </tr>
           {% endfor %}
-        </ul>
-        <hr>
-        <p><a href="{% url 'todo:task_list' %}">Lista de tasks</a></p>
-        <p><a href="{% url 'todo:task_create' %}">Add Task</a></p>
-        <p><a href="{% url 'category:category_list' %}">Ver categorias</a></p>
+        </tbody>
+      </table>
+      <hr>
     </div>
   </div>
 </div>
 
-  <script>
-    function alter(event) {
-      const checkbox = event.target;
-      const id_task = checkbox.getAttribute('data-task-id')
-    
+<script>
+  function alter(event) {
+    const checkbox = event.target;
+    const id_task = checkbox.getAttribute('data-task-id')
+
     fetch(`http://localhost:8000/altertask/completed/${id_task}`, {
-        method: 'GET',
-      })
+      method: 'GET',
+    })
       .then(response => response.json())
       .then(data => {
         console.log('Success:', data);
@@ -54,11 +68,11 @@
       .catch((error) => {
         console.error('Error:', error);
       });
-    }
+  }
 
-    document.querySelectorAll('.completed_checkbox').forEach(checkbox => {
-      checkbox.addEventListener('change', alter);
-    });
+  document.querySelectorAll('.completed_checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', alter);
+  });
 
-  </script>
+</script>
 {% endblock %}
