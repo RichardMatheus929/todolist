@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Login</button>
-  </form>
-  <a href="{% url 'accounts:signup' %}">Don't have an account? Sign up here.</a>
+<div id="form-login">
+  <h2 style="text-align: center;">Login</h2>
+  <div style="display: flex; justify-content: center; padding: 20px;">
+    <form method="post"
+      style="width: 300px; border: 1px solid #ccc; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0);">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; margin-top: 10px;">Login</button>
+    </form>
+  </div>
+  <div style="text-align: center; margin-top: 10px;">
+    <a href="{% url 'accounts:signup' %}">Não possui uma conta? Crie aqui.</a>
+  </div>
+</div>
 {% endblock %}

@@ -19,7 +19,6 @@ class CustomUserCreationForm(UserCreationForm):
         label=("Confirmação de senha"),
         widget=forms.PasswordInput(attrs={"autocomplete": "new-password","id":"password2"}),
         strip=False,
-        help_text=('<strong id="aviso_text"></strong>'),
     )
 
     class Meta:

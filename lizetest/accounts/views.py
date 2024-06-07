@@ -12,6 +12,8 @@ class SignUpView(FormView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('accounts:login')
 
+    
+
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
