@@ -1,17 +1,31 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<h2>Lista de categorias</h2>
-<ul>
-  {% for categoria in categorias %}
-  <li>
-    {{ categoria.name }}
-    <a href="{% url 'category:category_edit' pk=categoria.pk %}">Editar</a>
-    <a href="{% url 'category:category_delete' pk=categoria.pk %}">Remover</a>
 
-  </li>
-  {% endfor %}
-</ul>
-<a href="{% url 'category:category_create' %}">Adicionar mais categorias</a> <hr>
-<a href="{% url 'todo:task_list' %}">Voltar para lista de tasks</a>
-{% endblock %}
+<div class="container-fluid">
+  {% block content %}
+  <div class="row">
+
+    <div class="col-auto">
+      {% include 'sidebar.html' %}
+    </div>
+
+    <div class="col">
+      <h2 style="padding-top: 15px;">Lista de categorias</h2><br>
+      <ul>
+        {% for categoria in categorias %}
+        <li>
+          {{ categoria.name }}
+          <a href="{% url 'category:category_edit' pk=categoria.pk %}">Editar</a>
+          <a href="{% url 'category:category_delete' pk=categoria.pk %}">Remover</a>
+
+        </li>
+        {% endfor %}
+      </ul>
+      <a href="{% url 'category:category_create' %}">Adicionar mais categorias</a>
+      <hr>
+      <a href="{% url 'todo:task_list' %}">Voltar para lista de tasks</a>
+      {% endblock %}
+    </div>
+
+  </div>
+</div>
