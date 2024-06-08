@@ -12,7 +12,7 @@
             <a href="{% url 'todo:task_list' %}"
                 class="nav-link {% if request.resolver_match.url_name == 'task_list' %}active{% else %}link-dark{% endif %}"
                 aria-current="page">
-                Minha lista de tasks
+                Minha lista de tarefas
             </a>
         </li>
         <li>
@@ -28,10 +28,10 @@
         </li>
         <li style="padding-bottom: 30px;">
             <a href="{% url 'todo:task_create' %}" class="nav-link link-dark">
-                Criar nova task
+                Criar nova tarefa
             </a>
         </li>
-        <button type="button" class="btn btn-outline-info" id="btn-signout"> Signout </button>
+        <button type="button" class="btn btn-outline-info" id="btn-signout"> Sair do usuário  </button>
     </ul>
     <hr>
 

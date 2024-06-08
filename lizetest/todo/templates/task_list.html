@@ -10,12 +10,12 @@
       {% include 'popup.html' %}
       <h2 style="padding-top: 15px;">Lista de tarefas</h2><br>
       <form method="GET" action="{% url 'todo:task_list' %}">
-        <input type="text" name="query_task" placeholder="Pesquisa por nome ou categorias da task"
-          style="width: 100%;max-width: 300px;">
-        <button type="submit" class="btn btn-outline-success">Search</button>
+        <input type="text" name="query_task" placeholder="Pesquisa por nome ou categorias da tarefa"
+          style="width: 100%;max-width: 310px;">
+        <button type="submit" class="btn btn-outline-success">Pesquisar</button>
       </form><br>
 
-      <p>Encontramos {{number_tasks}} tasks para você</p>
+      <p>Encontramos {{number_tasks}} tarefas para você</p>
       <table class="table table-bordered">
         <thead>
           <tr class="table-dark">
@@ -40,7 +40,8 @@
             </td>
             <td>
               <a>
-                <button type="button" class="btn btn-outline-danger btn-delete" data-task-id="{{ task.pk }}" data-task-name="{{task.title}}">Deletar</button>
+                <button type="button" class="btn btn-outline-danger btn-delete" data-task-id="{{ task.pk }}" data-task-name="{{task.title}}" is-completed="{% if task.completed %}true{% else %}false{% endif %}"
+                >Deletar</button>
               </a>
             </td>
             <td>
@@ -59,9 +60,16 @@
 <script>
 
 function exibirpopup() {
-  const id_task = this.getAttribute('data-task-id');
+  const task_id = this.getAttribute('data-task-id');
+  const task_name = this.getAttribute('data-task-name');
+  const task_complete = this.getAttribute('is-completed');
+
   document.getElementById("myPopup").style.display = "block";
-  document.getElementById("myPopup").setAttribute('data-task-id',id_task);
+
+  // pega o id da taske e seta como atributo do elemento popup
+  document.getElementById("myPopup").setAttribute('data-task-id',task_id);
+  document.getElementById("myPopup").setAttribute('data-task-name',task_name);
+  document.getElementById("myPopup").setAttribute('is-complete',task_complete);
 }
 
 function closePopup() {
@@ -75,6 +83,14 @@ document.querySelectorAll(".btn-delete").forEach(button => {
   function deletetask() {
 
     const id_task = document.getElementById('myPopup').getAttribute('data-task-id')
+    const name_task = document.getElementById('myPopup').getAttribute('data-task-name')
+    const complete_task = document.getElementById('myPopup').getAttribute('is-complete')
+
+    console.log(complete_task)
+    if (complete_task === "true") {
+      alert('A tarefa '+String(name_task)+ " não pode ser removida porque é uma tarefa completa")
+    }
+
     fetch(`http://localhost:8000/altertask/delete/${id_task}`, {
       method: 'GET',
     })
