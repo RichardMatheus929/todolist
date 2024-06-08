@@ -31,7 +31,7 @@
                 Criar nova task
             </a>
         </li>
-        <button type="button" class="btn btn-outline-info" id="btn-signup"> Fazer login </button>
+        <button type="button" class="btn btn-outline-info" id="btn-signout"> Signout </button>
     </ul>
     <hr>
 
@@ -39,8 +39,7 @@
 
 <script>
     function changepag() {
-        console.log('clicou no btn-signup')
         window.location.href = '/accounts/singout';
     }
-    btn = document.getElementById('btn-signup').addEventListener('click', changepag)
+    btn = document.getElementById('btn-signout').addEventListener('click', changepag)
 </script>
