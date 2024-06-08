@@ -86,7 +86,6 @@ document.querySelectorAll(".btn-delete").forEach(button => {
     const name_task = document.getElementById('myPopup').getAttribute('data-task-name')
     const complete_task = document.getElementById('myPopup').getAttribute('is-complete')
 
-    console.log(complete_task)
     if (complete_task === "true") {
       alert('A tarefa '+String(name_task)+ " não pode ser removida porque é uma tarefa completa")
     }
