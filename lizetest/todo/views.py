@@ -70,12 +70,12 @@ class TaskDeleteView(APIView):
         try:
             task = Task.objects.get(id=task_id)
             if task.completed:
-                return Response({'message':'task complete, not permission delete'})
+                return Response({'sucess':False})
             else:
                 task.delete()
-                return Response({'message': 'Task deleted successfully'})
+                return Response({'sucess': True})
         except:
-            return Response({'Erro':'Talvez a id não exista'})
+            return Response({'sucess':False})
 
     # def delete(self, request, *args, **kwargs):
     #     from django.http import HttpResponseRedirect 
