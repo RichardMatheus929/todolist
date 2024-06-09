@@ -19,20 +19,22 @@
       <table class="table table-bordered">
         <thead>
           <tr class="table-dark">
-            <th scope="col">Nome</th>
+            <th onclick="alterfilter(this)" class="filter-header" data-field="title" scope="col">Nome ↕</th>
             <th scope="col">Descrição</th>
-            <th scope="col">Categoria</th>
+            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="category">Categoria ↕</th>
+            <th scope="col">Data</th>
             <th scope="col">Editar</th>
             <th scope="col">Deletar</th>
             <th scope="col">Feito</th>
           </tr>
         </thead>
         <tbody>
-          {% for task in tasks %}
+          {% for task in teste %}
           <tr class="{% if task.completed %}table-success{% else %}{% endif %}">
-            <td>{{task.title}}</td>
+            <td> {{task.title}}</td>
             <td>{{task.description}}</td>
             <td>{{task.category}}</td>
+            <td>{{task.created_at}}</td>
             <td>
               <a href="{% url 'todo:task_edit' pk=task.pk %}">
                 <button type="button" class="btn btn-outline-primary btn-delete">Editar</button>
@@ -58,6 +60,50 @@
 </div>
 
 <script>
+
+function alterfilter(header) {
+    // Adiciona a classe 'blink' para fazer o header piscar
+    header.classList.add('blink');
+
+    // Remove a classe 'rotate-down' de todos os headers, exceto o atual
+    document.querySelectorAll('.filter-header').forEach(function(el) {
+        if (el !== header) {
+            el.classList.remove('rotate-down');
+        }
+    });
+
+    // Remove a classe 'blink' após 1 segundo
+    setTimeout(function() {
+        header.classList.remove('blink');
+    }, 1000);
+
+  const filter = header.getAttribute('data-field')
+  fetch(`http://localhost:8000/alterfilter/${filter}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(data => {
+        window.location.reload();
+      })
+      .catch((error) => {
+      });
+    // Aqui você pode adicionar a lógica para chamar a função de filtragem com o campo desejado (nome, descrição, etc.)
+}
+
+
+// function alterfilter() {
+//   const filter = "title"
+//   fetch(`http://localhost:8000/alterfilter/${filter}`, {
+//       method: 'GET',
+//     })
+//       .then(response => response.json())
+//       .then(data => {
+//         window.location.reload();
+//       })
+//       .catch((error) => {
+//       });
+
+// }
 
 function exibirpopup() {
   const task_id = this.getAttribute('data-task-id');

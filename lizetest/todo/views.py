@@ -10,7 +10,21 @@ from lizetest.accounts.models import User
 
 from django.db.models import Q
 
-from rest_framework.views import Response, status,APIView
+from rest_framework.views import Response,APIView
+
+class AlterFilter(APIView):
+    def get(self,request,filter_user):
+        user = request.user
+        user_colum = ['created_at','title','category']
+        if filter_user in user_colum:
+            if user.filtro == filter_user:
+                user.filtro = 'created_at'
+                user.save()
+                return Response({'Filtro_atualizado':'created_at'})
+            else:
+                user.filtro = filter_user
+                user.save()
+                return Response({'filtro_atualizado':filter_user})
 
 class AlterTask(APIView):
     def get(self,rquest,task_id):
@@ -35,10 +49,26 @@ class TaskListView(ListView,BaseViews):
         return queryset
     
     def get_context_data(self, **kwargs):
+
         context = super().get_context_data(**kwargs)
         context['number_tasks'] = self.get_queryset().count()
         context['user'] = self.request.user.name
-        return context
+
+        query = self.request.GET.get('query_task')
+
+        if query:
+            context['teste'] = Task.objects.filter(author=self.request.user.id).filter(
+                Q(title__icontains=query) |
+                Q(category__name__icontains=query)
+            )
+            return context
+
+        if self.request.user.filtro == "created_at":
+            context['teste'] = Task.objects.filter(author=self.request.user.id).all().order_by('-created_at')
+            return context
+        else:
+            context['teste'] = Task.objects.filter(author=self.request.user.id).all().order_by(self.request.user.filtro)
+            return context
 
 class TaskCreateView(CreateView,BaseViews):
     model = Task

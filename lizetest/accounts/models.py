@@ -32,6 +32,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 		),
 	)
 
+	filtro = models.CharField(max_length=50,default='created_at')
+
 	objects = UserManager()
 
 	EMAIL_FIELD = 'email'
