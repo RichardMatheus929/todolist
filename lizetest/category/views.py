@@ -14,6 +14,10 @@ class CategoryListView(ListView,BaseViews):
 
     def get_queryset(self):
         return Category.objects.filter(author=self.request.user)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user.username
+        return context
 
 class CategoryCreateView(CreateView,BaseViews):
     model = Category

@@ -52,7 +52,7 @@ class TaskListView(ListView,BaseViews):
 
         context = super().get_context_data(**kwargs)
         context['number_tasks'] = self.get_queryset().count()
-        context['user'] = self.request.user.name
+        context['user'] = self.request.user.username
 
         query = self.request.GET.get('query_task')
 
