@@ -24,7 +24,8 @@
             </th>
             <th scope="col">Descrição</th>
             <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="category">Categoria<span style="float: right;">↕</span></th>
-            <th scope="col">Data</th>
+            <th scope="col">Data De criação</th>
+            <th scope="col">Data completo</th>
             <th scope="col">Editar</th>
             <th scope="col">Deletar</th>
             <th scope="col">Feito</th>
@@ -37,6 +38,7 @@
             <td>{{task.description}}</td>
             <td>{{task.category}}</td>
             <td>{{task.created_at}}</td>
+            <td>{% if task.completion_date == None %}Não completo{% else %}{{task.completion_date}}{% endif %}</td>
             <td>
               <a href="{% url 'todo:task_edit' pk=task.pk %}">
                 <button type="button" class="btn btn-outline-primary btn-delete">Editar</button>
