@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+<div class="container-fluid">
+  {% block content %}
+  <div class="row">
+
+    <div class="col-auto">
+      {% include 'sidebar.html' %}
+    </div>
+
+    <div class="col">
+      <h2 style="padding-top: 15px;">Lista de comentários</h2><br>
+
+
+      <table class="table table-bordered">
+        <thead>
+          <tr class="table-dark">
+            <th scope="col">Comentário</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for comment in comments %}
+          <tr>
+            <td>{{comment.comment}}</td>
+            <td>
+              <a href="{% url 'comments:comments_edit' pk=comment.pk %}">
+                <button type="button" class="btn btn-outline-primary">Editar</button>
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'comments:comments_delete' pk=comment.pk %}">
+              <button type="button" class="btn btn-outline-danger">Deletar</button>
+            </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endblock %}
+    </div>
+
+  </div>
+</div>

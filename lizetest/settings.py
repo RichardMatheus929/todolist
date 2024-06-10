@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'lizetest.core',
     'lizetest.accounts',
     'lizetest.category',
+    'lizetest.comments',
 ]
 
 MIDDLEWARE = [

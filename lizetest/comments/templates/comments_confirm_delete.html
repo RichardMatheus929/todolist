@@ -1,0 +1,16 @@
+<!-- task_confirm_delete.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 20px;">
+  <form method="post" enctype="multipart/form-data"
+    style="width: 400px; border: 1px solid #ccc; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgb(0, 0, 0);">
+    <h2>Confirmar</h2>
+    <label style="padding-bottom: 15px;">Você tem certeza que deseja deletar o comentário "{{ object.comment}}"?</label>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-danger">Confirm</button>
+    </form>
+  <a href="{% url 'category:category_list' %}" style="padding-top: 15px;">Voltar para lista de tasks</a>
+</div>
+{% endblock %}

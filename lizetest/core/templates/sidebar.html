@@ -22,6 +22,17 @@
             </a>
         </li>
         <li>
+            <a href="{% url 'comments:comments_list' %}"
+                class="nav-link {% if request.resolver_match.url_name == 'comments_list' %}active{% else %}link-dark{% endif %}">
+                MInha lista de comentários
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'comments:comments_create' %}" class="nav-link link-dark">
+                Criar novo comentário 
+            </a>
+        </li>
+        <li>
             <a href="{% url 'category:category_create' %}" class="nav-link link-dark">
                 Criar nova categoria
             </a>

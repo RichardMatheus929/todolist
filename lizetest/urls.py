@@ -19,6 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('lizetest.todo.urls', namespace='todo')),
+    path('comments/', include('lizetest.comments.urls', namespace='comment')),
     path('accounts/', include('lizetest.accounts.urls', namespace='accounts')),
     path('category/', include('lizetest.category.urls', namespace='category')),
 ]
