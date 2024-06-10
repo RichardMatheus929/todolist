@@ -31,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for task in teste %}
+          {% for task in tasks %}
           <tr class="{% if task.completed %}table-success{% else %}{% endif %}">
             <td> {{task.title}}</td>
             <td>{{task.description}}</td>
@@ -91,22 +91,6 @@ function alterfilter(header) {
       });
     // Aqui você pode adicionar a lógica para chamar a função de filtragem com o campo desejado (nome, descrição, etc.)
 }
-
-
-// function alterfilter() {
-//   const filter = "title"
-//   fetch(`http://localhost:8000/alterfilter/${filter}`, {
-//       method: 'GET',
-//     })
-//       .then(response => response.json())
-//       .then(data => {
-//         window.location.reload();
-//       })
-//       .catch((error) => {
-//       });
-
-// }
-
 function exibirpopup() {
   const task_id = this.getAttribute('data-task-id');
   const task_name = this.getAttribute('data-task-name');

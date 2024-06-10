@@ -52,22 +52,22 @@ class TaskListView(ListView,BaseViews):
 
         context = super().get_context_data(**kwargs)
         context['number_tasks'] = self.get_queryset().count()
-        context['user'] = self.request.user.name
+        context['user'] = self.request.user.username
 
         query = self.request.GET.get('query_task')
 
         if query:
-            context['teste'] = Task.objects.filter(author=self.request.user.id).filter(
+            context['tasks'] = Task.objects.filter(author=self.request.user.id).filter(
                 Q(title__icontains=query) |
                 Q(category__name__icontains=query)
             )
             return context
 
         if self.request.user.filtro == "created_at":
-            context['teste'] = Task.objects.filter(author=self.request.user.id).all().order_by('-created_at')
+            context['tasks'] = Task.objects.filter(author=self.request.user.id).all().order_by('-created_at')
             return context
         else:
-            context['teste'] = Task.objects.filter(author=self.request.user.id).all().order_by(self.request.user.filtro)
+            context['tasks'] = Task.objects.filter(author=self.request.user.id).all().order_by(self.request.user.filtro)
             return context
 
 class TaskCreateView(CreateView,BaseViews):
