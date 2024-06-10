@@ -1,7 +1,11 @@
 
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from datetime import datetime
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+
+import pytz
+from django.conf import settings
 
 from lizetest.core.models import BaseViews
 from .models import Task
@@ -30,6 +34,13 @@ class AlterTask(APIView):
     def get(self,rquest,task_id):
         task = Task.objects.get(id=task_id)
         task.completed = not task.completed
+
+        if task.completion_date:
+            task.completion_date = None
+        else:
+            local_tz = pytz.timezone(settings.TIME_ZONE)
+            now = datetime.now(local_tz)
+            task.completion_date = now
         task.save()
         return Response({'id_atualizado': task_id, "valor":task.completed})
 
