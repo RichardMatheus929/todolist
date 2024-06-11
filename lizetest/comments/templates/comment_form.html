@@ -2,11 +2,11 @@
 
 {% block content %}
 <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 20px;">
-  <h2 style="text-align: center; margin-bottom: 20px;">Create comment</h2>
+  <h2 style="text-align: center; margin-bottom: 20px;">{% if request.resolver_match.url_name == 'comments_create' %}Criar comentário{% else %}Editar comentário{% endif %}</h2>
   <form method="post" enctype="multipart/form-data" style="width: 400px; border: 1px solid #ccc; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0);">
     {% csrf_token %}
     {{ form.as_p }}
-    <button class="btn btn-primary" type="submit" style="width: 100%; padding: 10px; margin-top: 10px;">{% if request.resolver_match.url_name == 'category_create' %}Create{% else %}Save Changes{% endif %}</button>
+    <button class="btn btn-primary" type="submit" style="width: 100%; padding: 10px; margin-top: 10px;">{% if request.resolver_match.url_name == 'comments_create' %}Criar{% else %}Salvar alterações{% endif %}</button>
   </form>
   <div style="text-align: center; margin-top: 20px;">
     <a href="{% url 'todo:task_list' %}">Back to Task List</a>

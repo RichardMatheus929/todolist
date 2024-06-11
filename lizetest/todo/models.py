@@ -7,9 +7,9 @@ from lizetest.category.models import Category
 from lizetest.accounts.models import User
 
 class Task(BaseModel):
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255,verbose_name="Título")
+    description = models.TextField(verbose_name='Descrição')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,verbose_name="Categoria")
     completion_date = models.DateTimeField(null=True, blank=True)
     completed = models.BooleanField(default=False)
     author = models.ForeignKey(User,on_delete=models.CASCADE,blank=True)

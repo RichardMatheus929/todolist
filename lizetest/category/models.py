@@ -4,7 +4,7 @@ from lizetest.core.models import BaseModel
 from lizetest.accounts.models import User
 
 class Category(BaseModel):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255,verbose_name="Nome")
     author = models.ForeignKey(User,on_delete=models.CASCADE,blank=True)
 
     def __str__(self):
