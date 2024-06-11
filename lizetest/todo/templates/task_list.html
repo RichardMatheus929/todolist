@@ -16,15 +16,15 @@
       </form><br>
 
       <p>Encontramos {{number_tasks}} tarefas para você</p>
+      <p>Filtrando: {{filtro}}</p>
       <table class="table table-bordered">
         <thead>
           <tr class="table-dark">
-            <th onclick="alterfilter(this)" class="filter-header" data-field="title" scope="col">Nome<span style="float: right;">↕</span>
-            </th>
-            <th scope="col">Descrição</th>
-            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="category">Categoria<span style="float: right;">↕</span></th>
-            <th scope="col">Data De criação</th>
-            <th scope="col">Data completo</th>
+            <th onclick="alterfilter(this)" class="filter-header" data-field="title" scope="col" style="cursor: pointer;">Nome</th>
+            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="description" style="cursor: pointer;">Descrição</th>
+            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="category" style="cursor: pointer;">Categoria</th>
+            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="created_at" style="cursor: pointer;">Data De criação</th>
+            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="completion_date" style="cursor: pointer;">Data completo</th>
             <th scope="col">Editar</th>
             <th scope="col">Deletar</th>
             <th scope="col">Feito</th>
