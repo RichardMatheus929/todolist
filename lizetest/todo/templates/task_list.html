@@ -98,7 +98,7 @@ function exibirpopup() {
 
   document.getElementById("myPopup").style.display = "block";
 
-  // pega o id da taske e seta como atributo do elemento popup
+  // pega o id da task e seta como atributo do elemento popup
   document.getElementById("myPopup").setAttribute('data-task-id',task_id);
   document.getElementById("myPopup").setAttribute('data-task-name',task_name);
   document.getElementById("myPopup").setAttribute('is-complete',task_complete);
@@ -127,13 +127,13 @@ document.querySelectorAll(".btn-delete").forEach(button => {
     })
       .then(response => response.json())
       .then(data => {
-        // Opcional: Atualize a interface do usuário com base na resposta
         window.location.reload();
       })
       .catch((error) => {
       });
   }
 
+// Função de completar task
   function alter(event) {
     const checkbox = event.target;
     const id_task = checkbox.getAttribute('data-task-id')
@@ -143,7 +143,6 @@ document.querySelectorAll(".btn-delete").forEach(button => {
     })
       .then(response => response.json())
       .then(data => {
-        // Opcional: Atualize a interface do usuário com base na resposta
         window.location.reload();
       })
       .catch((error) => {

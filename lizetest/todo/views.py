@@ -70,11 +70,11 @@ class TaskListView(ListView, BaseViews):
         context['user'] = self.request.user.username
 
         filtro_select = {
-            "title": "Filtrando por nome",
-            "description":"Filtrando por descrição",
-            "category":"Filtrando por categoria",
-            "created_at":"Filtrando por data de criação",
-            "completion_date": "Filtrando por task completa",
+            "title": "Ordenando por nome",
+            "description":"Ordenando por descrição",
+            "category":"Ordenando por categoria",
+            "created_at":"Ordenando por data de criação",
+            "completion_date": "Ordenando por task completa",
         }
 
         context['filtro'] = filtro_select[self.request.user.filtro]
