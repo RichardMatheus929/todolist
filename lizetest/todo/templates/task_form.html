@@ -9,7 +9,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button class="btn btn-primary" type="submit" style="width: 100%; padding: 10px;">
-      {% if request.resolver_match.url_name == 'task_create' %}Criar task{% else %}Save Changes{% endif %}
+      {% if request.resolver_match.url_name == 'task_create' %}Criar task{% else %}Salvar alterações{% endif %}
     </button>
   </form>
   <div style="text-align: center; margin-top: 20px;">

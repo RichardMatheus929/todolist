@@ -24,8 +24,8 @@
         </thead>
         <tbody>
           {% for categoria in categorias %}
-          <tr onclick="query_task(this)" style="cursor: pointer;" name-category="{{categoria.name}}">
-            <td>{{categoria.name}}</td>
+          <tr>
+            <td onclick="query_task(this)" style="cursor: pointer;" name-category="{{categoria.name}}">{{categoria.name}}</td>
             <td>{{categoria.created_at}}</td>
             <td>
               <a href="{% url 'category:category_edit' pk=categoria.pk %}">
@@ -46,7 +46,7 @@
 <script>
   function query_task(header) {
     const name_category = header.getAttribute('name-category')
-    window.location.href = '/?query_task='+name_category
+    window.location.href = '/?query_task=' + name_category
   }
 </script>
 {% endblock %}

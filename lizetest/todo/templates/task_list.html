@@ -16,7 +16,7 @@
       </form><br>
 
       <p>Encontramos {{number_tasks}} tarefas para você</p>
-      <p>Ordenando {{filtro}}</p>
+      <p>{{filtro}}</p>
       <table class="table table-bordered">
         <thead>
           <tr class="table-dark">
@@ -40,7 +40,7 @@
             <td>{% if task.completion_date == None %}Não foi completo{% else %}{{task.completion_date}}{% endif %}</td>
             <td>
               <a href="{% url 'todo:task_edit' pk=task.pk %}">
-                <button type="button" class="btn btn-outline-primary btn-delete">Editar</button>
+                <button type="button" class="btn btn-outline-primary">Editar</button>
               </a>
             </td>
             <td>

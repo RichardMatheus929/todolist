@@ -70,11 +70,11 @@ class TaskListView(ListView, BaseViews):
         context['user'] = self.request.user.username
 
         filtro_select = {
-            "title": "por nome",
-            "description":"por descrição",
-            "category":"por categoria",
-            "created_at":"por data de criação",
-            "completion_date": "por task completa",
+            "title": "Filtrando por nome",
+            "description":"Filtrando por descrição",
+            "category":"Filtrando por categoria",
+            "created_at":"Filtrando por data de criação",
+            "completion_date": "Filtrando por task completa",
         }
 
         context['filtro'] = filtro_select[self.request.user.filtro]
@@ -85,22 +85,19 @@ class TaskListView(ListView, BaseViews):
                 Q(title__icontains=query) |
                 Q(category__name__icontains=query)
             )
-            context['filtro'] = "pesquisa"
+            context['filtro'] = "Pesquisa"
             return context
 
         if self.request.user.filtro == "created_at":
             context['tasks'] = Task.objects.filter(
                 author=self.request.user.id).all().order_by('-created_at')
-            return context
-        if self.request.user.filtro == "category":
+        elif self.request.user.filtro == "category":
             context['tasks'] = Task.objects.filter(
                 author=self.request.user.id).all().order_by('-category__created_at')
-            return context
         else:
             context['tasks'] = Task.objects.filter(
                 author=self.request.user.id).all().order_by(self.request.user.filtro)
-            return context
-
+        return context
 
 class TaskCreateView(CreateView, BaseViews):
     model = Task
