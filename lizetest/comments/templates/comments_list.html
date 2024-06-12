@@ -17,6 +17,7 @@
         <thead>
           <tr class="table-dark">
             <th scope="col">Comentário</th>
+            <th scope="col">Tarefa</th>
             <th scope="col">Editar</th>
             <th scope="col">Deletar</th>
           </tr>
@@ -25,6 +26,7 @@
           {% for comment in comments %}
           <tr>
             <td>{{comment.comment}}</td>
+            <td>{{comment.task}}</td>
             <td>
               <a href="{% url 'comments:comments_edit' pk=comment.pk %}">
                 <button type="button" class="btn btn-outline-primary">Editar</button>
