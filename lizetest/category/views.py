@@ -13,7 +13,7 @@ class CategoryListView(ListView,BaseViews):
     context_object_name = 'categorias'
 
     def get_queryset(self):
-        return Category.objects.filter(author=self.request.user)
+        return Category.objects.filter(author=self.request.user).order_by('-created_at')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user.username

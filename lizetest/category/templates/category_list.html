@@ -17,29 +17,36 @@
         <thead>
           <tr class="table-dark">
             <th scope="col">Nome</th>
+            <th scope="col">Data de criação</th>
             <th scope="col">Editar</th>
             <th scope="col">Deletar</th>
           </tr>
         </thead>
         <tbody>
           {% for categoria in categorias %}
-          <tr>
+          <tr onclick="query_task(this)" style="cursor: pointer;" name-category="{{categoria.name}}">
             <td>{{categoria.name}}</td>
+            <td>{{categoria.created_at}}</td>
             <td>
               <a href="{% url 'category:category_edit' pk=categoria.pk %}">
                 <button type="button" class="btn btn-outline-primary">Editar</button>
               </a>
             </td>
             <td><a href="{% url 'category:category_delete' pk=categoria.pk %}">
-              <button type="button" class="btn btn-outline-danger">Deletar</button>
-            </a>
-          </td>
+                <button type="button" class="btn btn-outline-danger">Deletar</button>
+              </a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
-      {% endblock %}
     </div>
-
   </div>
 </div>
+<script>
+  function query_task(header) {
+    const name_category = header.getAttribute('name-category')
+    window.location.href = '/?query_task='+name_category
+  }
+</script>
+{% endblock %}

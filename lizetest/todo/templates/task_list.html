@@ -16,7 +16,7 @@
       </form><br>
 
       <p>Encontramos {{number_tasks}} tarefas para você</p>
-      <p>Filtrando: {{filtro}}</p>
+      <p>Ordenando {{filtro}}</p>
       <table class="table table-bordered">
         <thead>
           <tr class="table-dark">
@@ -31,13 +31,13 @@
           </tr>
         </thead>
         <tbody>
-          {% for task in teste %}
+          {% for task in tasks %}
           <tr class="{% if task.completed %}table-success{% else %}{% endif %}">
             <td> {{task.title}}</td>
             <td>{{task.description}}</td>
             <td>{{task.category}}</td>
             <td>{{task.created_at}}</td>
-            <td>{% if task.completion_date == None %}Não completo{% else %}{{task.completion_date}}{% endif %}</td>
+            <td>{% if task.completion_date == None %}Não foi completo{% else %}{{task.completion_date}}{% endif %}</td>
             <td>
               <a href="{% url 'todo:task_edit' pk=task.pk %}">
                 <button type="button" class="btn btn-outline-primary btn-delete">Editar</button>
@@ -90,24 +90,7 @@ function alterfilter(header) {
       })
       .catch((error) => {
       });
-    // Aqui você pode adicionar a lógica para chamar a função de filtragem com o campo desejado (nome, descrição, etc.)
 }
-
-
-// function alterfilter() {
-//   const filter = "title"
-//   fetch(`http://localhost:8000/alterfilter/${filter}`, {
-//       method: 'GET',
-//     })
-//       .then(response => response.json())
-//       .then(data => {
-//         window.location.reload();
-//       })
-//       .catch((error) => {
-//       });
-
-// }
-
 function exibirpopup() {
   const task_id = this.getAttribute('data-task-id');
   const task_name = this.getAttribute('data-task-name');

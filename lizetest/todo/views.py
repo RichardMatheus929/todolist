@@ -52,7 +52,6 @@ class AlterTask(APIView):
 class TaskListView(ListView, BaseViews):
     model = Task
     template_name = 'task_list.html'
-    context_object_name = 'tasks'
 
     def get_queryset(self):
         queryset = Task.objects.filter(author=self.request.user)
@@ -81,9 +80,8 @@ class TaskListView(ListView, BaseViews):
         context['filtro'] = filtro_select[self.request.user.filtro]
 
         query = self.request.GET.get('query_task')
-
         if query:
-            context['teste'] = Task.objects.filter(author=self.request.user.id).filter(
+            context['tasks'] = Task.objects.filter(author=self.request.user.id).filter(
                 Q(title__icontains=query) |
                 Q(category__name__icontains=query)
             )
@@ -91,11 +89,15 @@ class TaskListView(ListView, BaseViews):
             return context
 
         if self.request.user.filtro == "created_at":
-            context['teste'] = Task.objects.filter(
+            context['tasks'] = Task.objects.filter(
                 author=self.request.user.id).all().order_by('-created_at')
             return context
+        if self.request.user.filtro == "category":
+            context['tasks'] = Task.objects.filter(
+                author=self.request.user.id).all().order_by('-category__created_at')
+            return context
         else:
-            context['teste'] = Task.objects.filter(
+            context['tasks'] = Task.objects.filter(
                 author=self.request.user.id).all().order_by(self.request.user.filtro)
             return context
 
