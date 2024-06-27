@@ -15,7 +15,7 @@
     </div>
     <div class="col col-md-9">
       {% include 'popup.html' %}
-      <h2 style="padding-top: 15px;">Lista de tarefas</h2><br>
+      <h2 style="padding-top: 15px; overflow: hidden;">Lista de tarefas</h2><br>
       <form method="GET" action="{% url 'todo:task_list' %}">
         <input type="text" name="query_task" placeholder="Pesquisa por nome ou categorias da tarefa"
           class="form-control mb-2" style="max-width: 310px;">
@@ -30,7 +30,8 @@
           <div class="card-header {% if task.completed %}bg-success text-white{% else %}bg-dark text-white{% endif %}">
             <div class="d-flex justify-content-between">
               <span>{{ task.title }}</span>
-              <span>
+              <span style="display: flex;gap: 5px;">
+                <span>Completar tarefa</span>
                 <input data-task-id="{{ task.pk }}" class="form-check" type="checkbox" id="flexSwitchCheckChecked" {% if task.completed %}checked{% endif %}>
               </span>
             </div>
