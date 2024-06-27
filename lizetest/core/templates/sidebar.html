@@ -1,5 +1,5 @@
 <!-- sidebar.html -->
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width:270px; height: 95vh;">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width:270px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap" />
@@ -24,7 +24,7 @@
         <li>
             <a href="{% url 'comments:comments_list' %}"
                 class="nav-link {% if request.resolver_match.url_name == 'comments_list' %}active{% else %}link-dark{% endif %}">
-                MInha lista de comentários
+                Minha lista de comentários
             </a>
         </li>
         <hr>
@@ -40,16 +40,16 @@
                 Criar nova categoria
             </a>
         </li>
-        <li style="padding-bottom: 30px;">
-            <a href="{% url 'comments:comments_create' %}" class="nav-link link-dark" 
+        <li>
+            <a href="{% url 'comments:comments_create' %}" class="nav-link link-dark"
                 onmouseover="this.className='nav-link active'" onmouseout="this.className='nav-link link-dark'">
                 Criar novo comentário
             </a>
         </li>
-        <button type="button" class="btn btn-outline-info" id="btn-signout"> Sair do usuário </button>
+        <hr>
     </ul>
-    <hr>
 </div>
+
 
 <script>
     function changepag() {

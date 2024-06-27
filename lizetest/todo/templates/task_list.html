@@ -3,60 +3,68 @@
 <div class="container-fluid">
   {% block content %}
   <div class="row">
-    <div class="col-auto">
-      {% include 'sidebar.html' %}
+    <div class="col-12 d-md-none text-end">
+      <button class="btn btn-primary mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+        Mostrar sidebar
+      </button>
     </div>
-    <div class="col">
+    <div class="col-auto col-md-3">
+      <div class="offcanvas-md offcanvas-start d-md-flex flex-column flex-shrink-0 p-3 bg-light" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+        {% include 'sidebar.html' %}
+      </div>
+    </div>
+    <div class="col col-md-9">
       {% include 'popup.html' %}
       <h2 style="padding-top: 15px;">Lista de tarefas</h2><br>
       <form method="GET" action="{% url 'todo:task_list' %}">
         <input type="text" name="query_task" placeholder="Pesquisa por nome ou categorias da tarefa"
-          style="width: 100%;max-width: 310px;">
-        <button type="submit" class="btn btn-outline-success">Pesquisar</button>
+          class="form-control mb-2" style="max-width: 310px;">
+        <button type="submit" class="btn btn-outline-success mb-2">Pesquisar</button>
       </form><br>
 
       <p>Encontramos {{number_tasks}} tarefas para você</p>
       <p>{{filtro}}</p>
-      <table class="table table-bordered">
-        <thead>
-          <tr class="table-dark">
-            <th onclick="alterfilter(this)" class="filter-header" data-field="title" scope="col" style="cursor: pointer;">Nome</th>
-            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="description" style="cursor: pointer;">Descrição</th>
-            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="category" style="cursor: pointer;">Categoria</th>
-            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="created_at" style="cursor: pointer;">Data De criação</th>
-            <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="completion_date" style="cursor: pointer;">Data completo</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Deletar</th>
-            <th scope="col">Feito</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for task in tasks %}
-          <tr class="{% if task.completed %}table-success{% else %}{% endif %}">
-            <td> {{task.title}}</td>
-            <td>{{task.description}}</td>
-            <td>{{task.category}}</td>
-            <td>{{task.created_at}}</td>
-            <td>{% if task.completion_date == None %}Não foi completo{% else %}{{task.completion_date}}{% endif %}</td>
-            <td>
-              <a href="{% url 'todo:task_edit' pk=task.pk %}">
-                <button type="button" class="btn btn-outline-primary">Editar</button>
-              </a>
-            </td>
-            <td>
-              <a>
-                <button type="button" class="btn btn-outline-danger btn-delete" data-task-id="{{ task.pk }}" data-task-name="{{task.title}}" is-completed="{% if task.completed %}true{% else %}false{% endif %}"
-                >Deletar</button>
-              </a>
-            </td>
-            <td>
-              <!-- <button type="button" class="{% if task.completed %}btn btn-success{% else %}btn btn-outline-success{% endif %}">Completa</button> -->
-              <input data-task-id="{{ task.pk }}" class="form-check" type="checkbox" id="flexSwitchCheckChecked"  {% if task.completed %}checked{% endif %}> 
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-dark">
+              <th onclick="alterfilter(this)" class="filter-header" data-field="title" scope="col" style="cursor: pointer;">Nome</th>
+              <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="description" style="cursor: pointer;">Descrição</th>
+              <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="category" style="cursor: pointer;">Categoria</th>
+              <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="created_at" style="cursor: pointer;">Data De criação</th>
+              <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="completion_date" style="cursor: pointer;">Data completo</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Deletar</th>
+              <th scope="col">Feito</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for task in tasks %}
+            <tr class="{% if task.completed %}table-success{% else %}{% endif %}">
+              <td> {{task.title}}</td>
+              <td>{{task.description}}</td>
+              <td>{{task.category}}</td>
+              <td>{{task.created_at}}</td>
+              <td>{% if task.completion_date == None %}Não foi completo{% else %}{{task.completion_date}}{% endif %}</td>
+              <td>
+                <a href="{% url 'todo:task_edit' pk=task.pk %}">
+                  <button type="button" class="btn btn-outline-primary">Editar</button>
+                </a>
+              </td>
+              <td>
+                <a>
+                  <button type="button" class="btn btn-outline-danger btn-delete" data-task-id="{{ task.pk }}" data-task-name="{{task.title}}" is-completed="{% if task.completed %}true{% else %}false{% endif %}"
+                  >Deletar</button>
+                </a>
+              </td>
+              <td>
+                <input data-task-id="{{ task.pk }}" class="form-check" type="checkbox" id="flexSwitchCheckChecked"  {% if task.completed %}checked{% endif %}> 
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
       <hr>
     </div>
   </div>
@@ -91,6 +99,7 @@ function alterfilter(header) {
       .catch((error) => {
       });
 }
+
 function exibirpopup() {
   const task_id = this.getAttribute('data-task-id');
   const task_name = this.getAttribute('data-task-name');
@@ -112,7 +121,7 @@ document.querySelectorAll(".btn-delete").forEach(button => {
     button.addEventListener("click", exibirpopup);
 });
 
-  function deletetask() {
+function deletetask() {
 
     const id_task = document.getElementById('myPopup').getAttribute('data-task-id')
     const name_task = document.getElementById('myPopup').getAttribute('data-task-name')
@@ -131,10 +140,10 @@ document.querySelectorAll(".btn-delete").forEach(button => {
       })
       .catch((error) => {
       });
-  }
+}
 
 // Função de completar task
-  function alter(event) {
+function alter(event) {
     const checkbox = event.target;
     const id_task = checkbox.getAttribute('data-task-id')
 
@@ -148,11 +157,12 @@ document.querySelectorAll(".btn-delete").forEach(button => {
       .catch((error) => {
       });
       closePopup()
-  }
+}
 
-  document.querySelectorAll('.form-check').forEach(checkbox => {
+document.querySelectorAll('.form-check').forEach(checkbox => {
     checkbox.addEventListener('change', alter);
-  });
+});
 
 </script>
 {% endblock %}
+x'
