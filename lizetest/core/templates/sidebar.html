@@ -10,7 +10,7 @@
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
             <a href="{% url 'todo:task_list' %}"
-                class="nav-link {% if request.resolver_match.url_name == 'task_list' %}active{% else %}link-dark{% endif %}" 
+                class="nav-link {% if request.resolver_match.url_name == 'task_list' %}active{% else %}link-dark{% endif %}"
                 aria-current="page">
                 Minha lista de tarefas
             </a>
@@ -47,13 +47,11 @@
             </a>
         </li>
         <hr>
+        <li style="text-align: center;">
+            <a href="{% url 'accounts:logout' %}" class="nav-link link-dark"
+                onmouseover="this.className='nav-link active'" onmouseout="this.className='nav-link link-dark'">
+                Sair do usuário
+            </a>
+        </li>
     </ul>
 </div>
-
-
-<script>
-    function changepag() {
-        window.location.href = '/accounts/singout';
-    }
-    btn = document.getElementById('btn-signout').addEventListener('click', changepag)
-</script>
