@@ -9,6 +9,7 @@ from django.conf import settings
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from lizetest.core.models import BaseViews
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Task
 from .forms import TaskForm
 from lizetest.accounts.models import User
@@ -37,19 +38,22 @@ class AlterFilter(APIView):
 
 class AlterTask(APIView):
     def get(self, rquest, task_id):
+
         task = Task.objects.get(id=task_id)
         task.completed = not task.completed
+
         if task.completion_date:
             task.completion_date = None
         else:
             local_tz = pytz.timezone(settings.TIME_ZONE)
             now = datetime.now(local_tz)
             task.completion_date = now
+
         task.save()
         return Response({'id_atualizado': task_id, "valor": task.completed})
 
 
-class TaskListView(ListView, BaseViews):
+class TaskListView(LoginRequiredMixin,ListView):
     model = Task
     template_name = 'task_list.html'
 
