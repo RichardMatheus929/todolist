@@ -24,47 +24,41 @@
 
       <p>Encontramos {{number_tasks}} tarefas para você</p>
       <p>{{filtro}}</p>
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr class="table-dark">
-              <th onclick="alterfilter(this)" class="filter-header" data-field="title" scope="col" style="cursor: pointer;">Nome</th>
-              <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="description" style="cursor: pointer;">Descrição</th>
-              <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="category" style="cursor: pointer;">Categoria</th>
-              <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="created_at" style="cursor: pointer;">Data De criação</th>
-              <th scope="col" onclick="alterfilter(this)" class="filter-header" data-field="completion_date" style="cursor: pointer;">Data completo</th>
-              <th scope="col">Editar</th>
-              <th scope="col">Deletar</th>
-              <th scope="col">Feito</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for task in tasks %}
-            <tr class="{% if task.completed %}table-success{% else %}{% endif %}">
-              <td> {{task.title}}</td>
-              <td>{{task.description}}</td>
-              <td>{{task.category}}</td>
-              <td>{{task.created_at}}</td>
-              <td>{% if task.completion_date == None %}Não foi completo{% else %}{{task.completion_date}}{% endif %}</td>
-              <td>
-                <a href="{% url 'todo:task_edit' pk=task.pk %}">
-                  <button type="button" class="btn btn-outline-primary">Editar</button>
-                </a>
-              </td>
-              <td>
-                <a>
-                  <button type="button" class="btn btn-outline-danger btn-delete" data-task-id="{{ task.pk }}" data-task-name="{{task.title}}" is-completed="{% if task.completed %}true{% else %}false{% endif %}"
-                  >Deletar</button>
-                </a>
-              </td>
-              <td>
-                <input data-task-id="{{ task.pk }}" class="form-check" type="checkbox" id="flexSwitchCheckChecked"  {% if task.completed %}checked{% endif %}> 
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+      <div class="card-deck">
+        {% for task in tasks %}
+        <div class="card mb-4 {% if task.completed %}border-success{% endif %}">
+          <div class="card-header {% if task.completed %}bg-success text-white{% else %}bg-dark text-white{% endif %}">
+            <div class="d-flex justify-content-between">
+              <span>{{ task.title }}</span>
+              <span>
+                <input data-task-id="{{ task.pk }}" class="form-check" type="checkbox" id="flexSwitchCheckChecked" {% if task.completed %}checked{% endif %}>
+              </span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Descrição</h5>
+            <p class="card-text">{{ task.description }}</p>
+            <h5 class="card-title">Categoria</h5>
+            <p class="card-text">{{ task.category }}</p>
+            <h5 class="card-title">Data de Criação</h5>
+            <p class="card-text">{{ task.created_at }}</p>
+            <h5 class="card-title">Data Completo</h5>
+            <p class="card-text">{% if task.completion_date == None %}Não foi completo{% else %}{{ task.completion_date }}{% endif %}</p>
+          </div>
+          <div class="card-footer">
+            <div class="d-flex justify-content-between">
+              <a href="{% url 'todo:task_edit' pk=task.pk %}">
+                <button type="button" class="btn btn-outline-primary">Editar</button>
+              </a>
+              <button type="button" class="btn btn-outline-danger btn-delete" data-task-id="{{ task.pk }}" data-task-name="{{ task.title }}" is-completed="{% if task.completed %}true{% else %}false{% endif %}">
+                Deletar
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
       </div>
+      
       <hr>
     </div>
   </div>
