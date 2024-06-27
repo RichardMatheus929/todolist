@@ -89,7 +89,7 @@ function alterfilter(header) {
     }, 1000);
 
   const filter = header.getAttribute('data-field')
-  fetch(`https://RichardAtaliba929.pythonanywhere.com/alterfilter/${filter}`, {
+  fetch(`http://localhost:8000/alterfilter/${filter}`, {
       method: 'GET',
     })
       .then(response => response.json())
@@ -131,7 +131,7 @@ function deletetask() {
       alert('A tarefa '+String(name_task)+ " não pode ser removida porque é uma tarefa completa")
     }
 
-    fetch(`https://RichardAtaliba929.pythonanywhere.com/altertask/delete/${id_task}`, {
+    fetch(`http://localhost:8000/altertask/delete/${id_task}`, {
       method: 'GET',
     })
       .then(response => response.json())
@@ -147,7 +147,7 @@ function alter(event) {
     const checkbox = event.target;
     const id_task = checkbox.getAttribute('data-task-id')
 
-    fetch(`https://RichardAtaliba929.pythonanywhere.com/altertask/completed/${id_task}`, {
+    fetch(`http://localhost:8000/altertask/completed/${id_task}`, {
       method: 'GET',
     })
       .then(response => response.json())
