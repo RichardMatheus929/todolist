@@ -131,7 +131,7 @@ function deletetask() {
       alert('A tarefa '+String(name_task)+ " não pode ser removida porque é uma tarefa completa")
     }
 
-    fetch(`http://RichardAtaliba929.pythonanywhere.com/altertask/delete/${id_task}`, {
+    fetch(`https://RichardAtaliba929.pythonanywhere.com/altertask/delete/${id_task}`, {
       method: 'GET',
     })
       .then(response => response.json())
@@ -147,7 +147,7 @@ function alter(event) {
     const checkbox = event.target;
     const id_task = checkbox.getAttribute('data-task-id')
 
-    fetch(`http://RichardAtaliba929.pythonanywhere.com/altertask/completed/${id_task}`, {
+    fetch(`https://RichardAtaliba929.pythonanywhere.com/altertask/completed/${id_task}`, {
       method: 'GET',
     })
       .then(response => response.json())
